@@ -70,10 +70,10 @@ AskTube lets you paste any public YouTube URL, automatically downloads the video
 
 ---
 ### 🤖 LangGraph Agent Architecture
----
+
 The chatbot uses a conditional routing graph to intelligently handle different query types:
 
-![LangGraph Architecture](assets/langgraph_architecture.png)
+![LangGraph Architecture](architecture/output.png)
 
 | Route | Trigger | Behaviour |
 |-------|---------|-----------|
