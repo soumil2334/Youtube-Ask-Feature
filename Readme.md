@@ -51,6 +51,11 @@ YouTube URL
          │
          ▼
 ┌─────────────────┐
+│   EasyOCR        │  ── extracts text from video frames & visual content
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
 │  LangGraph Agent │  ── routes queries, retrieves context, calls LLM
 └────────┬────────┘
          │
