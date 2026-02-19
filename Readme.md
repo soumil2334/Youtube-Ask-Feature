@@ -32,9 +32,9 @@
 AskTube lets you paste any public YouTube URL, automatically downloads the video, transcribes it using OpenAI Whisper, indexes the transcription into ChromaDB, and exposes a real-time WebSocket chat interface powered by a LangGraph agent — all served via a single FastAPI backend.
 
 ```
-YouTube URL
-    │
-    ▼
+     YouTube URL
+         │
+         ▼
 ┌─────────────────┐
 │  yt-dlp / pytube │  ── downloads video.mp4 + audio.wav
 └────────┬────────┘
