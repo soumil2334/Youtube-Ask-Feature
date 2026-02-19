@@ -64,9 +64,20 @@ AskTube lets you paste any public YouTube URL, automatically downloads the video
 ```
 
 ---
+### 🤖 LangGraph Agent Architecture
+---
+The chatbot uses a conditional routing graph to intelligently handle different query types:
 
+![LangGraph Architecture](assets/langgraph_architecture.png)
+
+| Route | Trigger | Behaviour |
+|-------|---------|-----------|
+| `GeneralQuery` | Casual or off-topic questions | Answers directly without retrieval |
+| `History_Only` | Follow-up questions referencing prior context | Uses conversation history only |
+| `Retrieval_Required` | Video-specific questions | Fetches relevant transcript chunks from ChromaDB + OCR data before calling the LLM |
+
+---
 ## 🗂️ Project Structure
-
 ```
 youtube-ask-feature/
 │
