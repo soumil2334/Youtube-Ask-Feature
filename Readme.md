@@ -21,7 +21,9 @@
 
 <div align="center">
 
-[![Watch the demo](architecture/thumbnail.png)](https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b)
+<a href="https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b">
+  <img src="assets/demo_thumbnail.png" width="600" alt="Watch the demo"/>
+</a>
 
 
 </div>
