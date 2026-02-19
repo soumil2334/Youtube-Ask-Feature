@@ -1,8 +1,16 @@
 import cv2 as cv
 from pathlib import Path
-from paddleocr import PaddleOCR
+import pytesseract
+from PIL import Image
+import logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-def get_frame(i:int, start:int, end:int, parent_dir:str):
+#upload_video/job_id will be parent_directory
+def get_frame(i:int, start:int, end:int, parent_dir:Path):
     '''
     i : to represent Document number
     start : starting time of the transcript
@@ -22,7 +30,7 @@ def get_frame(i:int, start:int, end:int, parent_dir:str):
 
     ret, frame=cap.read()
    
-    if not ret:
+    if ret:
         Parent_Dir=Path(parent_dir)
         images_folder=Parent_Dir/'images'
         images_folder.mkdir(parents=True, exist_ok=True)
@@ -31,47 +39,14 @@ def get_frame(i:int, start:int, end:int, parent_dir:str):
         return str(f'{images_folder}/{i}.jpg')
     
     else:
-        return None
+        logging.error('Frames not captured')
+        raise
 
-def perform_OCR(image_path:str):
-    if not image_path:
-        return None
-    
-    image=cv.imread(image_path)
-    if image:
-        #removing colour as in OCR colour is not required
-        gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
-        gray = cv.adaptiveThreshold(
-            gray, 255,
-            cv.ADAPTIVE_THRESH_GAUSSIAN_C,
-            cv.THRESH_BINARY,
-            31, 2)
-        
-        ocr = PaddleOCR(
-            use_angle_cls=True,  #handles rotated text
-            lang='en'            #change if needed
-        )
-        ocr_text=[]    
-        result=ocr.predict(gray, cls=True)
-        
-        for line in result[0]:
-            bbox=line[0]
-            text=line[1][0]
-            confidence= line[1][1]
-            
-            #appending the recognized text along with 
-            #the confidence and the bbox region it is 
-            #present within
-            ocr_text.append({
-                'text': text,
-                'confidence': confidence,
-                'bbox':bbox
-            })
-        
-        final_text=','.join(
-            text['text'] for text in ocr_text if text['confidence'] > 0.7
-            )
-        return final_text
-    else:
-        return None
-        
+def tesseract_OCR(image_path: str):
+    try:
+        text=pytesseract.image_to_string(Image.open(image_path), lang='eng')
+    except Exception as e:
+        logging.error(e)
+        raise
+
+    return text

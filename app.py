@@ -11,14 +11,16 @@ logging.basicConfig(
 
 def download_yt(video_dir, url:str):
     ydl_opts = {
-        "ffmpeg_location": r"C:/ffmpeg/bin",  
-        "format": "bestvideo+bestaudio/best",
-        "merge_output_format": "mp4",
-        "outtmpl": str(video_dir/"video.%(ext)s"),
-        "postprocessor_args": [
-        "-c:a", "aac", #apc integration with mp4 doesn't work well so audio converted into aac
-        "-b:a", "192k"],
-        }
+    "format": "bv*+ba/b",
+    "merge_output_format": "mp4",
+    "outtmpl": str(video_dir / "video.%(ext)s"),
+    "noplaylist": True,
+    "ffmpeg_location": r"C:/ffmpeg/bin",
+    "quiet": False,
+    "ignoreerrors": False
+}
+
+    
     logging.info('Downloading Youtube video')
     with YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
@@ -46,7 +48,3 @@ def process_video(UPLOAD_DIR, video_path, job_id:str):
     except ffmpeg.Error as e:
         raise ValueError(f"Error {e} occurred")
     pass
-
-#git new
-
-#git to new
