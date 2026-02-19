@@ -17,7 +17,7 @@
 
 ## 📽️ Demo
 
-> **Click the thumbnail below to watch the full project walkthrough on Loom**
+> **Full project walkthrough on Loom**
 
 <div align="center">
 
