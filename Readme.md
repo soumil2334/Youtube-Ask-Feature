@@ -21,12 +21,9 @@
 
 <div align="center">
 
-<<<<<<< HEAD
-https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b
-
 =======
-[![Watch the demo](https://cdn.loom.com/sessions/thumbnails/82c1a6fbd27b4b909d3c82cd5e03db8b/thumbnail.jpg)](https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b)
->>>>>>> 07215b827d7087a50a23b64cce214b7fcaa1e24c
+[![Watch the demo](https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b)
+
 
 </div>
 
