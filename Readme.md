@@ -21,8 +21,12 @@
 
 <div align="center">
 
+<<<<<<< HEAD
 https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b
 
+=======
+[![Watch the demo](https://cdn.loom.com/sessions/thumbnails/82c1a6fbd27b4b909d3c82cd5e03db8b/thumbnail.jpg)](https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b)
+>>>>>>> 07215b827d7087a50a23b64cce214b7fcaa1e24c
 
 </div>
 
@@ -33,9 +37,9 @@ https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b
 AskTube lets you paste any public YouTube URL, automatically downloads the video, transcribes it using OpenAI Whisper, indexes the transcription into ChromaDB, and exposes a real-time WebSocket chat interface powered by a LangGraph agent — all served via a single FastAPI backend.
 
 ```
-YouTube URL
-    │
-    ▼
+     YouTube URL
+         │
+         ▼
 ┌─────────────────┐
 │  yt-dlp / pytube │  ── downloads video.mp4 + audio.wav
 └────────┬────────┘
@@ -52,6 +56,11 @@ YouTube URL
          │
          ▼
 ┌─────────────────┐
+│   EasyOCR        │  ── extracts text from video frames & visual content
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
 │  LangGraph Agent │  ── routes queries, retrieves context, calls LLM
 └────────┬────────┘
          │
@@ -60,9 +69,20 @@ YouTube URL
 ```
 
 ---
+### 🤖 LangGraph Agent Architecture
+---
+The chatbot uses a conditional routing graph to intelligently handle different query types:
 
+![LangGraph Architecture](assets/langgraph_architecture.png)
+
+| Route | Trigger | Behaviour |
+|-------|---------|-----------|
+| `GeneralQuery` | Casual or off-topic questions | Answers directly without retrieval |
+| `History_Only` | Follow-up questions referencing prior context | Uses conversation history only |
+| `Retrieval_Required` | Video-specific questions | Fetches relevant transcript chunks from ChromaDB + OCR data before calling the LLM |
+
+---
 ## 🗂️ Project Structure
-
 ```
 youtube-ask-feature/
 │
