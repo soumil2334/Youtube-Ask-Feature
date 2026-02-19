@@ -21,9 +21,7 @@
 
 <div align="center">
 
-[![Watch the demo](https://cdn.loom.com/sessions/thumbnails/placeholder/thumbnail.jpg)](https://www.loom.com/share/YOUR_LOOM_VIDEO_ID)
-
-*▶ Replace the Loom link and thumbnail above with your actual recording*
+[![Watch the demo]([https://cdn.loom.com/sessions/thumbnails/placeholder/thumbnail.jpg)](https://www.loom.com/share/YOUR_LOOM_VIDEO_ID](https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b))
 
 </div>
 
