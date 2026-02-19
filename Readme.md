@@ -21,9 +21,7 @@
 
 <div align="center">
 
-<a href="https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b">
-  <img src="assets/demo_thumbnail.png" width="600" alt="Watch the demo"/>
-</a>
+[![▶ Watch Demo on Loom](https://img.shields.io/badge/▶%20Watch%20Demo-Loom-625DF5?style=for-the-badge&logo=loom&logoColor=white)](https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b)
 
 
 </div>
