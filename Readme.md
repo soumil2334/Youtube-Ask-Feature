@@ -22,7 +22,7 @@
 <div align="center">
 
 =======
-[![Watch the demo](https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b)
+[![Watch the demo](https://www.loom.com/share/82c1a6fbd27b4b909d3c82cd5e03db8b)]
 
 
 </div>
