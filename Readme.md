@@ -38,32 +38,32 @@ AskTube lets you paste any public YouTube URL, automatically downloads the video
          │
          ▼
 ┌─────────────────┐
-│  yt-dlp / pytube │  ── downloads video.mp4 + audio.wav
+│ yt-dlp / pytube │  ── downloads video.mp4 + audio.wav
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│  OpenAI Whisper  │  ── transcribes audio → timestamped segments (.jsonl)
+│  OpenAI Whisper │  ── transcribes audio → timestamped segments (.jsonl)
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│    ChromaDB      │  ── embeds & indexes transcript chunks
+│    ChromaDB     │  ── embeds & indexes transcript chunks
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│     Redis        │  ── caches chat history & LangGraph RAG decisions (Docker container)
+│      Redis      │  ── caches chat history & LangGraph RAG decisions (Docker container)
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│   EasyOCR        │  ── extracts text from video frames & visual content
+│     EasyOCR     │  ── extracts text from video frames & visual content
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│  LangGraph Agent │  ── routes queries, retrieves context, calls LLM
+│ LangGraph Agent │  ── routes queries, retrieves context, calls LLM
 └────────┬────────┘
          │
          ▼
