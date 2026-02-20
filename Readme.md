@@ -9,6 +9,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)](https://docker.com)
 [![LangGraph](https://img.shields.io/badge/LangGraph-Agent-FF6B6B?style=flat-square)](https://github.com/langchain-ai/langgraph)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector%20Store-orange?style=flat-square)](https://www.trychroma.com)
+[![Redis](https://img.shields.io/badge/Redis-Cache-DC382D?style=flat-square&logo=redis&logoColor=white)](https://redis.io)
 [![Whisper](https://img.shields.io/badge/OpenAI-Whisper-412991?style=flat-square&logo=openai&logoColor=white)](https://github.com/openai/whisper)
 
 </div>
@@ -52,6 +53,11 @@ AskTube lets you paste any public YouTube URL, automatically downloads the video
          │
          ▼
 ┌─────────────────┐
+│     Redis        │  ── caches chat history & LangGraph RAG decisions (Docker container)
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
 │   EasyOCR        │  ── extracts text from video frames & visual content
 └────────┬────────┘
          │
@@ -69,13 +75,15 @@ AskTube lets you paste any public YouTube URL, automatically downloads the video
 
 The chatbot uses a conditional routing graph to intelligently handle different query types:
 
-![LangGraph Architecture](architecture/output.png)
+![Architecture](architecture/output.png)
 
-| Route | Trigger | Behaviour |
-|-------|---------|-----------|
-| `GeneralQuery` | Casual or off-topic questions | Answers directly without retrieval |
-| `History_Only` | Follow-up questions referencing prior context | Uses conversation history only |
-| `Retrieval_Required` | Video-specific questions | Fetches relevant transcript chunks from ChromaDB + OCR data before calling the LLM |
+| Route | Cache | Trigger | Behaviour |
+|-------|-------|---------|-----------|
+| `GeneralQuery` | Redis (chat history) | Casual or off-topic questions | Answers directly without retrieval |
+| `History_Only` | Redis (chat history) | Follow-up questions referencing prior context | Uses conversation history only |
+| `Retrieval_Required` | Redis (RAG decisions) | Video-specific questions | Fetches relevant transcript chunks from ChromaDB + OCR data before calling the LLM 
+
+
 
 ---
 ## 🗂️ Project Structure
@@ -112,6 +120,7 @@ youtube-ask-feature/
 - **Timestamped retrieval** — the agent retrieves semantically relevant transcript segments
 - **LangGraph multi-node agent** — router decides between RAG retrieval and direct response
 - **Persistent vector store** — ChromaDB persists per-job so you can re-query without re-indexing
+- **Redis caching** — chat history and RAG routing decisions are persisted in a Redis Docker container, so context survives reconnects
 - **Fully Dockerized** — one command to run everything
 
 ---
