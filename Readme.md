@@ -156,8 +156,39 @@ Edit `.env` and fill in your keys:
 OPENAI_API_KEY=sk-...
 # Add any other keys your LLM_call.py or graph nodes require
 ```
+**3. Install Docker Desktop and start Redis**
 
-**3. Build and run**
+Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop/) for your OS, then pull and run the Redis container:
+````bash
+# Pull the official Redis image
+docker pull redis
+
+# Run Redis as a background container
+docker run -d --name redis-cache -p 6379:6379 redis
+
+# Verify Redis is running
+docker ps
+````
+
+> ✅ You should see `redis-cache` listed with status **Up** in the output of `docker ps`.
+> Redis will now be available at `localhost:6379` — this is what LangGraph uses to persist chat history and RAG routing decisions between WebSocket messages.
+
+**Renumber the old step 3 → step 4:**
+````markdown
+**4. Build and run AskTube**
+```bash
+docker compose up --build
+```
+````
+
+Also add this one-liner to your **Troubleshooting** section:
+````markdown
+**Chat history not persisting between sessions**
+- Make sure the Redis container is running: `docker ps | grep redis-cache`
+- If it's stopped, restart it: `docker start redis-cache`
+````
+
+**4. Build and run**
 
 ```bash
 docker compose up --build
@@ -176,7 +207,7 @@ docker run --gpus all -p 8000:8000 --env-file .env asktube
 docker run -p 8000:8000 --env-file .env asktube
 ```
 
-**4. Open the app**
+**5. Open the app**
 
 ```
 http://localhost:8000
@@ -205,20 +236,51 @@ pip install -r requirements.txt
 > **CUDA users:** Make sure your PyTorch install matches your CUDA version.
 > Visit [pytorch.org/get-started](https://pytorch.org/get-started/locally/) and install the matching wheel before running pip install.
 
-**3. Set up environment variables**
+**3. Install Docker Desktop and start Redis**
+
+Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop/) for your OS, then pull and run the Redis container:
+````bash
+# Pull the official Redis image
+docker pull redis
+
+# Run Redis as a background container
+docker run -d --name redis-cache -p 6379:6379 redis
+
+# Verify Redis is running
+docker ps
+````
+
+> ✅ You should see `redis-cache` listed with status **Up** in the output of `docker ps`.
+> Redis will now be available at `localhost:6379` — this is what LangGraph uses to persist chat history and RAG routing decisions between WebSocket messages.
+
+**Renumber the old step 3 → step 4:**
+````markdown
+**4. Build and run AskTube**
+```bash
+docker compose up --build
+```
+````
+
+Also add this one-liner to your **Troubleshooting** section:
+````markdown
+**Chat history not persisting between sessions**
+- Make sure the Redis container is running: `docker ps | grep redis-cache`
+- If it's stopped, restart it: `docker start redis-cache`
+````
+**4. Set up environment variables**
 
 ```bash
 cp .env.example .env
 # Edit .env with your API keys
 ```
 
-**4. Run the server**
+**5. Run the server**
 
 ```bash
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-**5. Open the app**
+**6. Open the app**
 
 ```
 http://localhost:8000
